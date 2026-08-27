@@ -1,0 +1,1057 @@
+/* =========================================================
+   Base
+   ========================================================= */
+body {
+  background: var(--ink, #050a07);
+}
+
+/* =========================================================
+   Hamburger button — fixed top-right, morphs into an X
+   ========================================================= */
+.hamburger {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--ink, #050a07);
+  border: 3px solid #111;
+  border-radius: 6px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.hamburger:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.85);
+}
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: var(--ember, #f4a623);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease, background 0.2s ease;
+}
+.hamburger.is-open {
+  background: var(--blood, #ec1f1a);
+}
+.hamburger.is-open span {
+  background: #fff;
+}
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* =========================================================
+   Nav overlay — full-screen comic takeover, not a bar
+   ========================================================= */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: radial-gradient(140% 100% at 85% 15%, var(--jungle-2, #11271b) 0%, var(--ink, #050a07) 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.nav-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.1;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.7) 1.5px, transparent 1.7px);
+  background-size: 12px 12px;
+}
+.nav-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.nav-overlay__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+.nav-overlay__link {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(42px, 9vw, 84px);
+  letter-spacing: 0.02em;
+  color: var(--chalk, #f5f3ea);
+  text-decoration: none;
+  line-height: 1.15;
+  transform: translateX(40px) rotate(-1deg);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease, color 0.15s ease;
+  transition-delay: calc(var(--i) * 60ms);
+}
+.nav-overlay.is-open .nav-overlay__link {
+  transform: translateX(0) rotate(0deg);
+  opacity: 1;
+}
+.nav-overlay__link:hover {
+  color: var(--ember, #f4a623);
+  transform: translateX(12px) rotate(-1.5deg) !important;
+}
+.nav-overlay__link.active {
+  color: var(--blood, #ec1f1a);
+  -webkit-text-stroke: 2px #111;
+}
+
+/* =========================================================
+   Story: autoplay slider, not scroll-pinned
+   ========================================================= */
+.story {
+  min-height: auto;
+  height: auto;
+}
+.story__stage--static {
+  position: relative;
+  height: auto;
+  min-height: 80vh;
+}
+.story__cue {
+  display: none;
+}
+.story__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 5;
+}
+.story__dots {
+  display: flex;
+  gap: 8px;
+}
+.story__dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+}
+.story__dots .dot.is-on {
+  background: var(--blood, #ec1f1a);
+}
+
+/* =========================================================
+   Generic page shell — solid dark scrim ON TOP of the jungle
+   gradient (not relying on the gradient's own midtones) so
+   text contrast is guaranteed regardless of scroll position.
+   ========================================================= */
+.page {
+  position: relative;
+  min-height: 100vh;
+  padding: 120px 24px 100px;
+  overflow: hidden;
+  color: #f5f3ea;
+  font-family: 'Comic Neue', 'Space Mono', monospace;
+  background: var(--ink, #050a07);
+}
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 0%, var(--jungle-2, #11271b) 0%, var(--jungle, #0b1c14) 45%, var(--ink, #050a07) 100%);
+}
+.page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.32);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.5) 1.5px, transparent 1.7px);
+  background-size: 10px 10px;
+}
+.page > * {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page__eyebrow {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  background: var(--ember, #f4a623);
+  color: #111;
+  padding: 5px 14px;
+  border: 2px solid #111;
+  transform: rotate(-1.2deg);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.7);
+}
+
+.page h1 {
+  font-family: 'Bangers', cursive;
+  font-weight: 400;
+  font-size: clamp(48px, 10vw, 92px);
+  letter-spacing: 0.02em;
+  color: var(--ember, #f4a623);
+  text-shadow: 3px 3px 0 #111, 6px 6px 0 rgba(0, 0, 0, 0.6);
+  -webkit-text-stroke: 1px #111;
+  transform: rotate(-1.5deg);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.page__subhead {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 16px;
+  color: #f5f3ea;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.page h2 {
+  font-family: 'Bangers', cursive;
+  font-weight: 400;
+  font-size: clamp(24px, 4vw, 34px);
+  color: var(--ember, #f4a623);
+  text-shadow: 2px 2px 0 #111;
+  margin-top: 50px;
+  margin-bottom: 18px;
+}
+
+.page p {
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: #f5f3ea;
+}
+
+.epk-download {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 16px 32px;
+  background: var(--blood, #ec1f1a);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  border: 3px solid #111;
+  border-radius: 4px;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.85);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.epk-download:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.85);
+}
+.epk-download:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.85);
+}
+
+/* ---- stat grid: rotated ink-stamp cards (light bg, dark text — inherently safe contrast) ---- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px;
+  margin: 36px 0;
+}
+.stat-card {
+  background: #f5f3ea;
+  color: #111;
+  border: 3px solid #111;
+  border-radius: 10px;
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  transform: rotate(-2deg);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.65);
+}
+.stat-grid > *:nth-child(even) {
+  transform: rotate(1.5deg);
+}
+.stat-grid > *:nth-child(3n) {
+  transform: rotate(-1deg);
+}
+.stat-card b {
+  display: block;
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(20px, 2.8vw, 28px);
+  color: var(--blood, #ec1f1a);
+}
+.stat-card span {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #111;
+  line-height: 1.4;
+}
+
+.highlight-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.highlight-list li {
+  background: rgba(255, 255, 255, 0.08);
+  border-left: 4px solid var(--ember, #f4a623);
+  padding: 10px 16px;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  color: #f5f3ea;
+}
+.highlight-list li::before {
+  content: '\2605\FE0E  ';
+  color: var(--ember, #f4a623);
+}
+
+.quote-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 4px;
+}
+.quote-list blockquote {
+  position: relative;
+  background: #fff;
+  color: #111;
+  border: 3px solid #111;
+  border-radius: 18px;
+  padding: 18px 22px;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.55);
+  transform: rotate(-1deg);
+}
+.quote-list blockquote:nth-child(even) {
+  transform: rotate(1deg);
+}
+.quote-list blockquote::after {
+  content: '';
+  position: absolute;
+  left: 30px;
+  bottom: -14px;
+  border: 8px solid transparent;
+  border-top-color: #111;
+}
+.quote-list blockquote::before {
+  content: '';
+  position: absolute;
+  left: 33px;
+  bottom: -8px;
+  border: 5px solid transparent;
+  border-top-color: #fff;
+  z-index: 1;
+}
+.quote-list blockquote p {
+  margin-bottom: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #111;
+}
+.quote-list cite {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-style: normal;
+  color: var(--blood, #ec1f1a);
+  font-weight: 700;
+}
+
+.chip-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.chip-list li {
+  font-family: 'Bangers', cursive;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  border: 2px solid var(--ember, #f4a623);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--ember, #f4a623);
+  padding: 8px 16px;
+  border-radius: 4px;
+  transform: rotate(-3deg);
+}
+.chip-list li:nth-child(even) {
+  transform: rotate(2.5deg);
+}
+.chip-list li:nth-child(3n) {
+  transform: rotate(-1.5deg);
+}
+
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 32px;
+  margin-top: 36px;
+  padding: 10px;
+}
+.press-card {
+  position: relative;
+  background: #f5f3ea;
+  color: #111;
+  border: 3px solid #111;
+  padding: 22px 20px;
+  font-family: 'Comic Neue', cursive;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.55);
+  transform: rotate(-2deg);
+  transition: transform 0.15s ease;
+}
+.press-grid > *:nth-child(2n) {
+  transform: rotate(1.5deg);
+}
+.press-grid > *:nth-child(3n) {
+  transform: rotate(-1deg);
+}
+.press-card:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+.press-card::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff6b6b, var(--blood, #ec1f1a));
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.6);
+}
+.press-card h3 {
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+  color: var(--blood, #ec1f1a);
+  margin-bottom: 8px;
+}
+.press-card p {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #333;
+}
+.press-card a {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 13px;
+  color: #111;
+  border-bottom: 2px solid var(--blood, #ec1f1a);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+  background: #f5f3ea;
+  border: 4px solid #111;
+  border-radius: 6px;
+  padding: 30px;
+  box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.75);
+  margin-top: 8px;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 14px;
+  border-radius: 4px;
+  border: 2px solid #111;
+  background: #fff;
+  color: #111;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #777;
+  font-weight: 400;
+}
+.contact-form button {
+  padding: 14px;
+  background: var(--ember, #f4a623);
+  border: 3px solid #111;
+  color: #111;
+  font-family: 'Bangers', cursive;
+  font-size: 19px;
+  letter-spacing: 0.03em;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.85);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.contact-form button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.85);
+}
+.contact-form button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.85);
+}
+/* =========================================================
+   About page — a solid opaque "dossier" card on the dark
+   background. Every piece of text sits on a fully opaque
+   surface (cream paper or white), never on translucent
+   layers, so contrast can't silently fail.
+   ========================================================= */
+.about-page {
+  min-height: 100vh;
+  background: var(--ink, #050a07);
+  padding: 90px 20px 100px;
+  display: flex;
+  justify-content: center;
+}
+.dossier {
+  width: 100%;
+  max-width: 820px;
+  background: #f3ecd8;
+  color: #181818;
+  border: 4px solid #111;
+  border-radius: 8px;
+  padding: 44px 40px;
+  box-shadow: 10px 12px 0 rgba(0, 0, 0, 0.6);
+  transform: rotate(-0.6deg);
+  font-family: 'Comic Neue', 'Space Mono', monospace;
+}
+.dossier__stamp {
+  display: inline-block;
+  background: var(--blood, #ec1f1a);
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border: 2px solid #111;
+  transform: rotate(-2deg);
+  margin-bottom: 16px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+}
+.dossier__title {
+  font-family: 'Bangers', cursive;
+  font-weight: 400;
+  font-size: clamp(46px, 9vw, 84px);
+  color: #161616;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.dossier__subhead {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 15px;
+  color: #3a3a3a;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+.dossier p {
+  color: #1c1c1c;
+  line-height: 1.7;
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+.dossier h2 {
+  font-family: 'Bangers', cursive;
+  font-weight: 400;
+  font-size: clamp(22px, 3.4vw, 30px);
+  color: var(--blood, #ec1f1a);
+  margin-top: 40px;
+  margin-bottom: 14px;
+}
+
+.dossier .stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin: 28px 0;
+}
+.dossier .stat-card {
+  background: #fff;
+  color: #181818;
+  border: 2px solid #111;
+  border-radius: 8px;
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 4px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
+}
+.dossier .stat-card b {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(18px, 2.4vw, 24px);
+  color: var(--blood, #ec1f1a);
+}
+.dossier .stat-card span {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #333;
+}
+
+.dossier .highlight-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dossier .highlight-list li {
+  background: rgba(0, 0, 0, 0.04);
+  border-left: 4px solid var(--blood, #ec1f1a);
+  padding: 8px 14px;
+  color: #1c1c1c;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.dossier .quote-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.dossier .quote-list blockquote {
+  position: relative;
+  background: #fff;
+  color: #111;
+  border: 3px solid #111;
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-weight: 700;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+}
+.dossier .quote-list blockquote p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 6px;
+  color: #111;
+}
+.dossier .quote-list cite {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--blood, #ec1f1a);
+}
+
+.dossier .chip-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.dossier .chip-list li {
+  font-family: 'Bangers', cursive;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  background: #fff;
+  border: 2px solid var(--blood, #ec1f1a);
+  color: var(--blood, #ec1f1a);
+  padding: 7px 14px;
+  border-radius: 4px;
+}
+.dossier .chip-list li:nth-child(even) {
+  border-color: #0f8a3d;
+  color: #0f8a3d;
+}
+
+.dossier .epk-download {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 14px 28px;
+  background: #161616;
+  color: #f3ecd8;
+  text-decoration: none;
+  font-family: 'Bangers', cursive;
+  font-size: 18px;
+  letter-spacing: 0.03em;
+  border: 3px solid #111;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--blood, #ec1f1a);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.dossier .epk-download:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--blood, #ec1f1a);
+}
+.dossier .epk-download:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--blood, #ec1f1a);
+}
+
+@media (max-width: 640px) {
+  .dossier {
+    padding: 30px 22px;
+  }
+}
+/* =========================================================
+   Press page — flat dark background, opaque header stamp,
+   opaque corkboard for clippings. Same no-transparency rule
+   as the About redesign: every text surface is solid.
+   ========================================================= */
+.press-page {
+  min-height: 100vh;
+  background: var(--ink, #050a07);
+  padding: 110px 24px 100px;
+}
+.press-hero {
+  max-width: 700px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+.press-hero__stamp {
+  display: inline-block;
+  background: var(--ember, #f4a623);
+  color: #111;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border: 2px solid #111;
+  transform: rotate(-1.5deg);
+  margin-bottom: 18px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.7);
+}
+.press-hero__title {
+  font-family: 'Bangers', cursive;
+  font-weight: 400;
+  font-size: clamp(46px, 9vw, 84px);
+  color: var(--ember, #f4a623);
+  -webkit-text-stroke: 1.5px #111;
+  text-shadow: 3px 3px 0 #111, 6px 6px 0 rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+}
+.press-hero__subhead {
+  display: inline-block;
+  background: #fff;
+  color: #111;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 6px 16px;
+  border: 2px solid #111;
+  border-radius: 20px;
+}
+
+.press-empty {
+  max-width: 460px;
+  margin: 40px auto 0;
+  background: #f3ecd8;
+  color: #181818;
+  border: 3px dashed #111;
+  border-radius: 10px;
+  padding: 28px;
+  text-align: center;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* ---- press table: Reporter / Title / Date rows, one column per article ---- */
+.press-table-wrap {
+  max-width: 1100px;
+  margin: 44px auto 0;
+  overflow-x: auto;
+  background: #f3ecd8;
+  border: 4px solid #111;
+  border-radius: 8px;
+  box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.55);
+  padding: 4px;
+}
+.press-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: 'Comic Neue', cursive;
+}
+.press-table th,
+.press-table td {
+  border: 2px solid #111;
+  padding: 14px 18px;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.press-table th[scope='row'] {
+  position: sticky;
+  left: 0;
+  background: var(--ember, #f4a623);
+  color: #111;
+  font-family: 'Bangers', cursive;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+.press-table td {
+  background: #fff;
+  color: #111;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: normal;
+  min-width: 200px;
+  max-width: 320px;
+}
+.press-table tr:nth-child(2) td {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+}
+.press-table td a {
+  color: var(--blood, #ec1f1a);
+  text-decoration: underline;
+}
+.press-table tr:last-child td {
+  font-family: 'Space Mono', monospace;
+  color: #333;
+  white-space: nowrap;
+}
+/* =========================================================
+   Contact page — comic-book contact panel
+   Scoped ONLY to .contact-form so shared styles remain safe.
+   ========================================================= */
+
+.contact-form {
+  width: 100%;
+  max-width: 680px;
+  margin: 38px auto 0;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  background: #f3ecd8;
+  color: #111;
+
+  border: 4px solid #111;
+  border-radius: 8px;
+
+  box-shadow:
+    8px 8px 0 #111,
+    14px 14px 0 rgba(236, 31, 26, 0.85);
+
+  transform: rotate(-0.6deg);
+  position: relative;
+}
+
+/* Little comic-book label */
+.contact-form::before {
+  content: 'DROP US A LINE';
+  position: absolute;
+  top: -18px;
+  right: 24px;
+
+  padding: 6px 14px;
+
+  background: var(--ember, #f4a623);
+  color: #111;
+
+  border: 3px solid #111;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  transform: rotate(2deg);
+
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.7);
+}
+
+
+/* ---------------------------------------------------------
+   Inputs
+   --------------------------------------------------------- */
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 15px 16px;
+
+  background: #fff;
+  color: #111;
+
+  border: 3px solid #111;
+  border-radius: 4px;
+
+  outline: none;
+
+  font-family: 'Comic Neue', cursive;
+  font-size: 15px;
+  font-weight: 700;
+
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.contact-form input {
+  min-height: 52px;
+}
+
+.contact-form textarea {
+  min-height: 160px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+
+/* Placeholder */
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #777;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 1;
+}
+
+
+/* Focus state */
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--blood, #ec1f1a);
+
+  box-shadow:
+    4px 4px 0 var(--blood, #ec1f1a);
+
+  transform: translate(-1px, -1px);
+}
+
+
+/* ---------------------------------------------------------
+   Send button
+   --------------------------------------------------------- */
+
+.contact-form button {
+  width: 100%;
+  min-height: 56px;
+
+  margin-top: 4px;
+
+  padding: 14px 20px;
+
+  background: var(--blood, #ec1f1a);
+  color: #fff;
+
+  border: 3px solid #111;
+  border-radius: 4px;
+
+  font-family: 'Bangers', cursive;
+  font-size: 23px;
+  letter-spacing: 0.04em;
+
+  cursor: pointer;
+
+  box-shadow: 5px 5px 0 #111;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease;
+}
+
+.contact-form button:hover {
+  background: var(--ember, #f4a623);
+  color: #111;
+
+  transform: translate(-3px, -3px);
+
+  box-shadow: 8px 8px 0 #111;
+}
+
+.contact-form button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #111;
+}
+
+
+/* ---------------------------------------------------------
+   Success state
+   --------------------------------------------------------- */
+
+.page > p {
+  position: relative;
+}
+
+.page > p:first-of-type {
+  max-width: 680px;
+}
+
+
+/* ---------------------------------------------------------
+   Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .contact-form {
+    max-width: none;
+    padding: 24px 20px;
+
+    margin-top: 34px;
+
+    box-shadow:
+      5px 5px 0 #111,
+      9px 9px 0 rgba(236, 31, 26, 0.85);
+  }
+
+  .contact-form::before {
+    right: 14px;
+    font-size: 9px;
+    padding: 5px 10px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 13px 14px;
+  }
+
+  .contact-form textarea {
+    min-height: 140px;
+  }
+
+  .contact-form button {
+    min-height: 52px;
+    font-size: 21px;
+  }
+}
