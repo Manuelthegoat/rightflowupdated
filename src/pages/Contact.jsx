@@ -1,31 +1,73 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 function Contact() {
-  const [sent, setSent] = useState(false)
+  const [sent, setSent] = useState(false);
 
   function handleSubmit(e) {
-    e.preventDefault()
-    // TODO: wire this to your backend/API endpoint when it's ready.
-    // e.g. fetch('/api/contact', { method: 'POST', body: new FormData(e.target) })
-    setSent(true)
+    e.preventDefault();
+
+    fetch("https://formspree.io/f/xgaewrgb", {
+      method: "POST",
+      body: new FormData(e.target),
+      headers: { Accept: "application/json" },
+    }).then(() => setSent(true));
   }
 
   return (
-    <div className="page">
-      <h1>Contact</h1>
-      <p>Got a question, booking request, or just want to say what's up? Send us a message.</p>
-      {sent ? (
-        <p>Thanks — form UI is working. (Not yet wired to actually send anywhere — see the TODO in Contact.jsx.)</p>
-      ) : (
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="email" name="email" placeholder="Your email" required />
-          <textarea name="message" placeholder="Your message" rows={6} required></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-      )}
-    </div>
-  )
+    <main className="contact-page">
+      <header className="contact-page__hero">
+        <span className="contact-page__stamp">Bookings &amp; Enquiries</span>
+        <h1>Say Hello</h1>
+        <p>
+          For show bookings, collaborations, press, or a quick hello, leave a
+          note and the Rightflow team will get back to you.
+        </p>
+      </header>
+
+      <section className="contact-desk" aria-labelledby="contact-form-title">
+        <div className="contact-desk__heading">
+          <span>New message</span>
+          <h2 id="contact-form-title">Let&apos;s talk.</h2>
+        </div>
+
+        {sent ? (
+          <div className="contact-success" role="status">
+            <span className="contact-success__mark" aria-hidden="true">
+              OK
+            </span>
+            <h2>Message received.</h2>
+            <p>Thanks for reaching out. We&apos;ll be in touch soon.</p>
+            <button type="button" onClick={() => setSent(false)}>
+              Send another
+            </button>
+          </div>
+        ) : (
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <div className="contact-form__row">
+              <label>
+                <span>Your name</span>
+                <input type="text" name="name" autoComplete="name" required />
+              </label>
+              <label>
+                <span>Email address</span>
+                <input
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  required
+                />
+              </label>
+            </div>
+            <label>
+              <span>Your message</span>
+              <textarea name="message" rows={7} required></textarea>
+            </label>
+            <button type="submit">Send Message</button>
+          </form>
+        )}
+      </section>
+    </main>
+  );
 }
 
-export default Contact
+export default Contact;

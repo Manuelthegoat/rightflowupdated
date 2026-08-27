@@ -167,6 +167,12 @@ function Hero() {
                 )
               })}
             </div>
+            <button className="stage__arrow" type="button" aria-label="Next artwork" onClick={next}>
+              <span aria-hidden="true">&#8594;</span>
+            </button>
+            <button className="stage__arrow stage__arrow--back" type="button" aria-label="Previous artwork" onClick={prev}>
+              <span aria-hidden="true">&#8592;</span>
+            </button>
             <div className="stage__shadow" aria-hidden="true"></div>
           </div>
         </div>
