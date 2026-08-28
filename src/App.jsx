@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Chain3D from './components/Chain3D.jsx'
 import Preloader from './components/Preloader.jsx'
 import Nav from './components/Nav.jsx'
@@ -10,11 +11,22 @@ import useMetaPixelPageview from './hooks/useMetaPixelPageview.js'
 import './styles/jungle.css'
 import './styles/overrides.css'
 
+function ScrollToTop() {
+  const location = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [location.pathname, location.search])
+
+  return null
+}
+
 function App() {
   useMetaPixelPageview()
 
   return (
     <>
+      <ScrollToTop />
       <Chain3D />
       <Preloader />
       <Nav />
