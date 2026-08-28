@@ -134,8 +134,8 @@ function Hero() {
       <div className="atmos" aria-hidden="true">
         <div className="smoke"></div>
         <div className="silhouettes">
-          <img className="s-l" src="/image copy 9.png" alt="" loading="lazy" />
-          <img className="s-r" src="/image copy 2.png" alt="" loading="lazy" />
+          <img className="s-l" src="/optimized/silhouette-left.jpg" alt="" loading="lazy" decoding="async" />
+          <img className="s-r" src="/optimized/silhouette-right.jpg" alt="" loading="lazy" decoding="async" />
         </div>
       </div>
       <div className="particles" id="particlesHero" aria-hidden="true"></div>
@@ -156,13 +156,21 @@ function Hero() {
             <div className="stack" id="stack" ref={stackRef}>
               {slides.map((s, i) => {
                 const cls = cardClass(i, active, n)
+                const off = (i - active + n) % n
+                const shouldLoad = off === 0 || off === 1 || off === n - 1
                 return (
                   <figure
                     className={cls}
                     key={s.src}
                     onClick={() => (cls === 'card is-front' ? next() : go(i))}
                   >
-                    <img src={`/${s.src}`} alt={`${s.title} — ${s.sub}`} />
+                    <img
+                      src={shouldLoad ? `/${s.src}` : 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='}
+                      data-src={`/${s.src}`}
+                      alt={`${s.title} — ${s.sub}`}
+                      loading={i === active ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
                   </figure>
                 )
               })}

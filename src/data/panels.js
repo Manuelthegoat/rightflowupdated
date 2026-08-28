@@ -2,7 +2,7 @@ const panels = [
   {
     num: '01',
     color: 'c-red',
-    img: 'transrowdy.PNG',
+    img: 'optimized/transrowdy.png',
     alt: 'Rowdy B',
     name: 'Rowdy B',
     bubble: '"You Ain\u2019t Sl1ck!"',
@@ -12,7 +12,7 @@ const panels = [
   {
     num: '02',
     color: 'c-purple',
-    img: 'transscotty.PNG',
+    img: 'optimized/transscotty.png',
     alt: 'Scotty Olorin',
     name: 'Scotty Olorin',
     bubble: '"Farm City [Cana Music]\u2026"',
@@ -22,7 +22,7 @@ const panels = [
   {
     num: '03',
     color: 'c-green',
-    img: 'transluwa.PNG',
+    img: 'optimized/transluwa.png',
     alt: 'luwa',
     name: 'Luwa.Mp4',
     bubble: '"Reject Boyz 2"',
@@ -32,7 +32,7 @@ const panels = [
   {
     num: '04',
     color: 'c-yellow',
-    img: 'transdiddy.PNG',
+    img: 'optimized/transdiddy.png',
     alt: 'Diddy Turner',
     name: 'Diddy Turner',
     bubble: '\u201cWomen On Women\u201d',
@@ -42,7 +42,7 @@ const panels = [
   {
     num: '05',
     color: 'c-blue',
-    img: 'transblack.PNG',
+    img: 'optimized/transblack.png',
     alt: 'BlacBoyy',
     name: 'BlacBoyy',
     bubble: '"Love & Fun"',
@@ -52,7 +52,7 @@ const panels = [
   {
     num: '06',
     color: 'c-red',
-    img: 'transzay.PNG',
+    img: 'optimized/transzay.png',
     alt: 'Tenski',
     name: 'Zaylevelten',
     bubble: '"Man O War!"',
@@ -65,7 +65,7 @@ const panels = [
   {
     num: '07',
     color: 'c-green',
-    img: 'transkay.PNG',
+    img: 'optimized/transkay.png',
     alt: 'NmKay',
     name: 'Nm Kay',
     bubble: '"Internet Money"',
@@ -75,7 +75,7 @@ const panels = [
   {
     num: '08',
     color: 'c-purple',
-    img: 'transosime.PNG',
+    img: 'optimized/transosime.png',
     alt: 'Osime',
     name: 'Osime',
     bubble: '"What\'s Your Name?"',
@@ -85,7 +85,7 @@ const panels = [
   {
     num: '09',
     color: 'c-red',
-    img: 'transsanta.PNG',
+    img: 'optimized/transsanta.png',
     alt: 'SantaKlara',
     name: 'SantaKlara',
     bubble: '"Transcend"',
@@ -95,7 +95,7 @@ const panels = [
   {
     num: '10',
     color: 'c-blue',
-    img: 'tranindi.PNG',
+    img: 'optimized/tranindi.png',
     alt: 'Indi',
     name: 'Indi',
     bubble: '"Its Real Princessa"',

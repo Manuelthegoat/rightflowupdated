@@ -14,7 +14,7 @@ function Home() {
       <Story />
       <section className="album-dispatch" aria-labelledby="album-dispatch-title">
         <div className="album-dispatch__visual">
-          <img src="/artwork.PNG" alt="Welcome to the Jungle album artwork" loading="lazy" />
+          <img src="/optimized/artwork.jpg" alt="Welcome to the Jungle album artwork" loading="lazy" decoding="async" />
           <span>RF / FIELD NOTE 01</span>
         </div>
         <div className="album-dispatch__copy">

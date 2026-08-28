@@ -18,7 +18,7 @@ function Comic() {
       </div>
 
       <div className="comic__outro">
-        <img className="comic__tracklist" src="/image copy 5.png" alt="Welcome to the Jungle tracklist" loading="lazy" />
+        <img className="comic__tracklist" src="/optimized/tracklist.jpg" alt="Welcome to the Jungle tracklist" loading="lazy" decoding="async" />
         <div>
           <h2>
             Out <em>Now</em>

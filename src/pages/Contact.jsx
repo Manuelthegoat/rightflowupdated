@@ -6,7 +6,7 @@ function Contact() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch("https://formspree.io/f/xgaewrgb", {
+    fetch("https://formspree.io/f/xrpggazd", {
       method: "POST",
       body: new FormData(e.target),
       headers: { Accept: "application/json" },

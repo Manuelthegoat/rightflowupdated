@@ -41,7 +41,7 @@ function About() {
           <p className="about-hero__intro">A Nigerian-born artist turning hip-hop, trap, emo rap, and Afro-fusion into a sound that crosses borders without losing its roots.</p>
         </div>
         <figure className="about-cover">
-          <img src="/artwork.PNG" alt="Welcome to the Jungle album artwork by Rightflow" />
+          <img src="/optimized/artwork.jpg" alt="Welcome to the Jungle album artwork by Rightflow" loading="lazy" decoding="async" />
           <figcaption>Welcome to the Jungle</figcaption>
         </figure>
       </section>

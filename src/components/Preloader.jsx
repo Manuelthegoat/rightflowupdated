@@ -18,7 +18,7 @@ function Preloader() {
   return (
     <div className={`preloader${hide ? ' hide' : ''}`} id="preloader">
       <div className="preloader-content">
-        <img src="/artwork.PNG" className="preloader-cover" alt="" />
+        <img src="/optimized/artwork.jpg" className="preloader-cover" alt="" />
         <h2>WELCOME TO THE JUNGLE</h2>
         <p>Loading the experience...</p>
       </div>
