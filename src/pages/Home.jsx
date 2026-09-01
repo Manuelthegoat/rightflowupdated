@@ -28,7 +28,7 @@ function Home() {
             <span><b>10</b> features</span>
             <span><b>2</b> countries</span>
           </div>
-          <a className="album-dispatch__link" href="https://ffm.to/junglerf" target="_blank" rel="noreferrer">
+          <a id="album-dispatch-link" className="album-dispatch__link" href="https://ffm.to/junglerf" target="_blank" rel="noreferrer" aria-label="Listen to Welcome to the Jungle" data-meta-name="Enter The Jungle">
             Enter the jungle <span aria-hidden="true">↗</span>
           </a>
         </div>

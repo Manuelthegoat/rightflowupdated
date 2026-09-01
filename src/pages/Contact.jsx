@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { trackMetaEvent } from '../lib/meta.js'
 
 function Contact() {
   const [sent, setSent] = useState(false);
@@ -10,7 +11,11 @@ function Contact() {
       method: "POST",
       body: new FormData(e.target),
       headers: { Accept: "application/json" },
-    }).then(() => setSent(true));
+    }).then((response) => {
+      if (!response.ok) throw new Error('Form submission failed')
+      trackMetaEvent('Lead', { content_name: 'Contact form' })
+      setSent(true)
+    }).catch(() => {})
   }
 
   return (
@@ -37,7 +42,7 @@ function Contact() {
             </span>
             <h2>Message received.</h2>
             <p>Thanks for reaching out. We&apos;ll be in touch soon.</p>
-            <button type="button" onClick={() => setSent(false)}>
+            <button type="button" aria-label="Send another message" onClick={() => setSent(false)}>
               Send another
             </button>
           </div>
@@ -62,7 +67,7 @@ function Contact() {
               <span>Your message</span>
               <textarea name="message" rows={7} required></textarea>
             </label>
-            <button type="submit">Send Message</button>
+            <button type="submit" aria-label="Send contact message">Send Message</button>
           </form>
         )}
       </section>

@@ -93,11 +93,11 @@ function Press() {
             </tr>
           </thead>
           <tbody>
-            {articles.map((article) => (
+            {articles.map((article, index) => (
               <tr key={`${article.outlet}-${article.year}`}>
                 <td>{article.outlet}</td>
                 <td>
-                  <a href={article.url} target="_blank" rel="noreferrer">
+                  <a id={`press-link-${index + 1}`} href={article.url} target="_blank" rel="noreferrer" aria-label={`Read ${article.title} from ${article.outlet}`} data-meta-name={`Press - ${article.outlet}`}>
                     {article.title}
                   </a>
                 </td>

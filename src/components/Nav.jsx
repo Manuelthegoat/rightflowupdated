@@ -46,6 +46,8 @@ function Nav() {
               to={l.to}
               end={l.end}
               className={({ isActive }) => `nav-overlay__link${isActive ? ' active' : ''}`}
+              aria-label={l.label}
+              data-meta-name={`Navigation - ${l.label}`}
               style={{ '--i': i }}
               tabIndex={open ? 0 : -1}
             >

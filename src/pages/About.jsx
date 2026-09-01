@@ -86,10 +86,11 @@ function About() {
 
       <section className="about-footer">
         <div><span>Live</span><h2>Performance History</h2><ul>{PERFORMANCES.map((performance) => <li key={performance}>{performance}</li>)}</ul></div>
-        <a className="about-footer__download" href="/Rightflow_EPK_2026.pdf" download>Download EPK</a>
+        <a id="download-epk-link" className="about-footer__download" href="/Rightflow_EPK_2026.pdf" download aria-label="Download the Rightflow 2026 EPK" data-meta-name="Download EPK" onClick={() => trackMetaEvent('Download', { content_name: 'Rightflow EPK 2026' })}>Download EPK</a>
       </section>
     </main>
   )
 }
 
 export default About
+import { trackMetaEvent } from '../lib/meta.js'

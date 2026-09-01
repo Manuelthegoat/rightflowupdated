@@ -1,5 +1,6 @@
 import panels from '../data/panels.js'
 import Panel from './Panel.jsx'
+import { trackMetaEvent } from '../lib/meta.js'
 
 function Comic() {
   return (
@@ -25,7 +26,7 @@ function Comic() {
           </h2>
           <p>12 tracks. One jungle. Survive it.</p>
           <div className="button-save">
-            <a href="https://ffm.to/junglerf" target="_blank" rel="noreferrer" className="button">
+            <a id="save-album-link" href="https://ffm.to/junglerf" target="_blank" rel="noreferrer" className="button" aria-label="Save the Welcome to the Jungle album" data-meta-name="Save The Album" onClick={() => trackMetaEvent('ViewContent', { content_name: 'Welcome to the Jungle album' })}>
               Save The Album
             </a>
           </div>

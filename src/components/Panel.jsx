@@ -14,11 +14,17 @@ function Panel({ data }) {
         <span className="cap-box">{data.name}</span>
         <span className="bubble">{data.bubble}</span>
         {data.button.type === "preview" ? (
-          <button className="preview-btn" data-audio={data.button.audio}>
+          <button
+            type="button"
+            className="preview-btn"
+            data-audio={data.button.audio}
+            aria-label={`Play preview for ${data.name}`}
+            title={`Play preview for ${data.name}`}
+          >
             ▶ Play Preview
           </button>
       ) : (
-  <a className="tease" href={data.button.href} target="_blank" rel="noreferrer">
+  <a className="tease" href={data.button.href} target="_blank" rel="noreferrer" aria-label={`${data.button.label} for ${data.name}`} data-meta-name={`${data.button.label} - ${data.name}`}>
     {data.button.label}
   </a>
 )}

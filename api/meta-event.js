@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     return res.status(503).json({ error: 'Meta access token is not configured' })
   }
 
-  const { event_name, event_id, event_source_url } = req.body || {}
+  const { event_name, event_id, event_source_url, custom_data } = req.body || {}
   if (!event_name || !event_id || !event_source_url) {
     return res.status(400).json({ error: 'event_name, event_id, and event_source_url are required' })
   }
@@ -27,6 +27,7 @@ export default async function handler(req, res) {
     event_id,
     event_source_url,
     action_source: 'website',
+    ...(custom_data && typeof custom_data === 'object' ? { custom_data } : {}),
     user_data: {
       ...(clientIp ? { client_ip_address: clientIp } : {}),
       ...(userAgent ? { client_user_agent: userAgent } : {}),
