@@ -1,1 +1,141 @@
+.newsletter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
 
+.newsletter-modal {
+  position: relative;
+  display: flex;
+  max-width: 700px;
+  width: 90%;
+  background: #0b3025;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.35s ease-out;
+}
+
+.newsletter-image {
+  flex: 1;
+  min-height: 320px;
+  background-image: url("https://embed.filekitcdn.com/e/vqqyDtb5WWCHAjaSV9kJ5g/7FzuGJFAmgNH6XiESZqmTN");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.85;
+}
+
+.newsletter-content {
+  flex: 1;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #e8e5d8;
+}
+
+.newsletter-content h2 {
+  color: #d6a928;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 12px;
+}
+
+.newsletter-content p {
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.newsletter-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  background: transparent;
+  border: 1px solid #aab8a8;
+  border-radius: 0;
+  color: #e8e5d8;
+  font-size: 15px;
+}
+
+.newsletter-form input::placeholder {
+  color: #aab8a8;
+}
+
+.newsletter-form input:focus {
+  outline: none;
+  border-color: #d6a928;
+}
+
+.newsletter-form button {
+  width: 100%;
+  padding: 12px 24px;
+  background: #d6a928;
+  color: #071c17;
+  border: none;
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.newsletter-form button:hover {
+  background: #e8bc3a;
+}
+
+.newsletter-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.newsletter-success {
+  color: #6fd3a8;
+}
+
+.newsletter-error {
+  color: #f2643b;
+  font-size: 13px;
+  margin-top: -8px;
+}
+
+.newsletter-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #e8e5d8;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.newsletter-close:hover {
+  color: #d6a928;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .newsletter-image { display: none; }
+  .newsletter-modal { width: 92%; }
+  .newsletter-content { padding: 32px 24px; }
+}
