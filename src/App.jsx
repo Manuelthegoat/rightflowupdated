@@ -8,6 +8,8 @@ import About from './pages/About.jsx'
 import Press from './pages/Press.jsx'
 import Contact from './pages/Contact.jsx'
 import useMetaPixelPageview from './hooks/useMetaPixelPageview.js'
+import NewsletterPopup from "./components/NewsletterPopup";
+import "./components/NewsletterPopup.css";
 import './styles/jungle.css'
 import './styles/overrides.css'
 
@@ -26,6 +28,7 @@ function App() {
 
   return (
     <>
+      <NewsletterPopup />
       <ScrollToTop />
       <Chain3D />
       <Preloader />
